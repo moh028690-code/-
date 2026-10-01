@@ -21,8 +21,10 @@ jobs:
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.19.x'
           channel: 'stable'
+
+      - name: Generate Android Files
+        run: flutter create --platforms=android .
 
       - name: Install dependencies
         run: flutter pub get
@@ -30,8 +32,9 @@ jobs:
       - name: Build APK
         run: flutter build apk --release
 
-      - name: Upload APK
+      - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
         with:
           name: adhkar-app-apk
           path: build/app/outputs/flutter-apk/app-release.apk
+
